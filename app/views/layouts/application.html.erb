@@ -8,9 +8,15 @@
 </head>
 <body>
 
-<%= render 'layouts/flash_msg' %>
-
-<%= yield %>
+<div id="main_container">
+	<div id="navigation"> <%= render 'layouts/navigation' %>	</div>
+	
+	<div id="yielded_container">
+		<%= render 'layouts/flash_msg' %>
+		<%= yield %>
+	</div>
+	<div id="footer"></div>
+</div>
 
 </body>
 </html>
