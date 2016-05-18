@@ -6,5 +6,6 @@ class User < ActiveRecord::Base
   #        :timeoutable, :recoverable, stretches: 20
 
   devise :database_authenticatable, :registerable,
-       :recoverable, :rememberable, :trackable, :validatable
+       :recoverable, :rememberable, :trackable, :validatable,
+       :encryptable, :stretches => 30
 end
