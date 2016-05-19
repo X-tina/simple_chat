@@ -29,6 +29,14 @@ gem 'devise'
 gem 'devise-encryptable'
 gem 'simple_token_authentication', '~> 1.0'
 
+#Socials
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-vkontakte'
+
+#Styles
+gem 'bootstrap-sass', '~> 3.2.0'
+gem "jquery-ui-rails"
 
 # Hide ENV vars
 gem "figaro"
