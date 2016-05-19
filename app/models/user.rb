@@ -28,14 +28,14 @@ class User < ActiveRecord::Base
                )
         user.save!
       end
-
-      #Associate the identity with user
-      if identity.user != user
-        identity.user = user
-        identity.save!
-      end
-
-      user
     end
+
+    #Associate the identity with user
+    if identity.user != user
+      identity.user = user
+      identity.save!
+    end
+
+    user
   end
 end
