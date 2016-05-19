@@ -29,6 +29,10 @@ gem 'devise'
 gem 'devise-encryptable'
 gem 'simple_token_authentication', '~> 1.0'
 
+
+# Hide ENV vars
+gem "figaro"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
