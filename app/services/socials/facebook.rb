@@ -7,6 +7,7 @@ class Socials::Facebook
 
   def create_user
     get_facebook_data
+    
     identity = Identity.where(provider: 'facebook', uid: @user_hash['id']).first_or_create do |identity|
       identity.provider_token = @oauth_access_token
     end
@@ -21,6 +22,7 @@ class Socials::Facebook
                password: Devise.friendly_token[0,20]
              )
       @user.save!
+      @user.identities << identity
     end
 
     @user
