@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
   
   devise_scope :user do
-    post 'omniauth_callbacks/facebook', to: "omniauth_callbacks#facebook_auth"
+    post 'omniauth_callbacks/facebook', to: "omniauth_callbacks#facebook_auth_by_token"
   end
 
   

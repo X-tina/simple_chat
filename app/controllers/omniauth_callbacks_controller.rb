@@ -3,7 +3,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def self.provides_callback_for(provider)
     class_eval %Q{
       def #{provider}
-        @user = User.find_for_oauth(auth_hash, current_user)
+        facebook_init = Socials::Facebook.new
+        @user = facebook_init.create_user_by_callback(auth_hash, current_user)
 
         if @user.persisted?
           if request_json?
@@ -21,14 +22,15 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         end
       end
     }
+
   end
 
   [:facebook].each { |provider| provides_callback_for(provider) }
 
   # Make POST request to: h/omniauth_callbacks/facebook with params: {"user": {"oauth_token": "......"} }
-  def facebook_auth
+  def facebook_auth_by_token
     facebook_data = Socials::Facebook.new(user_oauth_params[:oauth_token])
-    @user = facebook_data.create_user
+    @user = facebook_data.create_user_by_token
   
     render json: { meta: { message: 'successfull sign in via Facebook' },
                    data: { authentication_token: @user.authentication_token,
