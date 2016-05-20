@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
        :encryptable, :stretches => 30,
        :omniauth_providers => [:facebook]
   
-  has_many :identities
+  has_many :identities, dependent: :destroy
 
   #For Facebook now
   def self.find_for_oauth(auth_hash, signed_in_resource = nil)

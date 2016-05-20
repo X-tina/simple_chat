@@ -1,4 +1,5 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
+
   def self.provides_callback_for(provider)
     class_eval %Q{
       def #{provider}
@@ -24,10 +25,29 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   [:facebook].each { |provider| provides_callback_for(provider) }
 
+  # Make POST request to: h/omniauth_callbacks/facebook with params: {"user": {"oauth_token": "......"} }
+  def facebook_auth
+    facebook_data = Socials::Facebook.new(user_oauth_params[:oauth_token])
+    @user = facebook_data.create_user
+  
+    render json: { meta: { message: 'successfull sign in via Facebook' },
+                   data: { authentication_token: @user.authentication_token,
+                           email: @user.email } }
+    rescue Koala::Facebook::AuthenticationError
+      render json: { errors: 'wrong token' }
+    rescue ActiveRecord::RecordInvalid => e
+      render json: { errors: e.message }
+  end
+
+
   private
 
     def auth_hash
       request.env["omniauth.auth"]
+    end
+
+    def user_oauth_params
+      params.fetch(:user, {})
     end
 
 end
