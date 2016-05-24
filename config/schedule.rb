@@ -22,6 +22,9 @@
 # To clear your crontab, run the following command:
 # $ whenever -c
 
+# Set development env for cron
+# bundle exec whenever --set 'environment=development' -w
+
 # Write new job into crontab
 # whenever -w
 
