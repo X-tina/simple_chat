@@ -8,4 +8,8 @@ class User < ActiveRecord::Base
        :omniauth_providers => [:facebook]
   
   has_many :identities, dependent: :destroy
+
+  def self.count_time
+    p Time.now
+  end
 end

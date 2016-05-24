@@ -42,6 +42,9 @@ gem "jquery-ui-rails"
 # Hide ENV vars
 gem "figaro"
 
+# Shedule tasks
+gem 'whenever', :require => false
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
