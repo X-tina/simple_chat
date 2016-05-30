@@ -6,7 +6,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` on Rails 4+ applications as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '0a2f71bce1d06f99c9c6d88170030a3cae9da8df57a5d2c5331d6681aa6e520f512bd07aebf4bdc6c2288b56103a3758ef67fabedc5d0cc511eadc7d30439087'
+  config.secret_key = ENV['DEVISE_SECRET_KEY']
   # config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET'], scope: 'email', info_fields: 'email,name,first_name,last_name,gender'
   config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET']
 
