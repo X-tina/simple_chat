@@ -10,6 +10,7 @@ gem 'puma', '~> 3.0'
 # Database
 gem 'pg'
 gem 'redis'
+gem 'hiredis'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

@@ -12,4 +12,14 @@ class User < ActiveRecord::Base
   def self.count_time
     p Time.now
   end
+
+  def online?
+    $redis_onlines.exist(self.id)
+  end
+
+  def self.all_who_are_in_touch
+    ids = $redis_onlines.keys
+    self.find(ids)
+  end
+
 end

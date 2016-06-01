@@ -8,9 +8,19 @@ class ApplicationController < ActionController::Base
   acts_as_token_authentication_handler_for User, if: :request_json?
   respond_to :html, :json
 
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
+  before_action :set_online
 
   def request_json?
     request.format == 'application/json'
   end
+
+  private
+    def set_online
+      if !!current_user
+        # не нужно значение, нужен только ключ
+        # `ex: 10*60` - устанавливаем время жизни ключа - 10 минут, через 10 мину ключ удалиться
+        $redis_onlines.set(current_user.id, nil, ex: 10*60)
+      end
+    end
 end
