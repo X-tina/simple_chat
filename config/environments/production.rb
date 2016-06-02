@@ -42,8 +42,11 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Action Cable endpoint configuration
-  config.action_cable.url = "wss://chat-app-first.herokuapp.com/cable"
-  config.action_cable.allowed_request_origins = [ "https://chat-app-first.herokuapp.com", /http:\/\/chat-app-first.herokuapp.*/ ]
+  # config.action_cable.url = "wss://chat-app-first.herokuapp.com/cable"
+  # config.action_cable.allowed_request_origins = [ "https://chat-app-first.herokuapp.com", /http:\/\/chat-app-first.herokuapp.*/ ]
+  config.action_cable.url = "wss://test-self-app.herokuapp.com/cable"
+  config.action_cable.allowed_request_origins = [ "https://test-self-app.herokuapp.com", /http:\/\/test-self-app.herokuapp.*/ ]
+
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true

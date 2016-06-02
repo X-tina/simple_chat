@@ -1,2 +1,5 @@
 require "redis"
-$redis_onlines = Redis.new
+require 'uri'
+
+uri = URI.parse(ENV["REDISTOGO_URL"])
+$redis_onlines = Redis.new(:url => uri)
