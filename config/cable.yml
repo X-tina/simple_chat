@@ -1,6 +1,7 @@
 production:
   adapter: redis
-  url: redis://:action_cable@pub-redis-12030.us-east-1-3.7.ec2.redislabs.com:12030
+  # url: redis://:action_cable@pub-redis-12030.us-east-1-3.7.ec2.redislabs.com:12030
+  url: redis://redistogo:04a17a7af0c3423ef289bcb38ae18f9f@viperfish.redistogo.com:10730
 
 development:
   adapter: async
