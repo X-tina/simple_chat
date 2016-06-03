@@ -2,3 +2,5 @@
   <div id= <%= dom_id(obj) %>><%= obj.content %></div>
 <% end %>
 <%= paginate @messages %>
+
+<%= link_to "Back to chat", rooms_show_path %>

@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.try(:all_who_are_in_touch)
   end
 
   # GET /users/1
