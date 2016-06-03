@@ -1,0 +1,4 @@
+<% @messages.each do |obj| %>
+  <div id= <%= dom_id(obj) %>><%= obj.content %></div>
+<% end %>
+<%= paginate @messages %>
