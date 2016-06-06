@@ -1,5 +1,8 @@
 <% @messages.each do |obj| %>
-  <div id= <%= dom_id(obj) %>><%= obj.content %></div>
+  <div>
+  	<%= obj.content %>
+  	Likes: <%= Actions::Like.new.get_likes(obj) %>
+  </div>
 <% end %>
 <%= paginate @messages %>
 

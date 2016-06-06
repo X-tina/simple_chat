@@ -1,3 +1,6 @@
 <div class="message">
-  <p><%= message.content %> </p>
+  <%= message.content %>
+  <% %w(+ -).map do |p| %>
+    <%= link_to "#{p}", actions_message_path(id: message.id, action_param: "#{p}"), method: :post %>
+  <% end %>
 </div>

@@ -14,6 +14,13 @@ Rails.application.routes.draw do
 
 
   resources :users
+
+  resources :messages, only: [:index] do
+    member do
+      post 'actions', to: 'actions#index'
+    end
+  end
+
   mount ActionCable.server => "/cable"
   
   # The priority is based upon order of creation: first created -> highest priority.
