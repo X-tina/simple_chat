@@ -50,6 +50,7 @@ gem "figaro"
 
 # Shedule tasks
 gem 'whenever', :require => false
+gem 'sidekiq'
 
 # Pagination
 gem 'kaminari'

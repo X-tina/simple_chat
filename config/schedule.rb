@@ -19,6 +19,13 @@
 
 # Learn more: http://github.com/javan/whenever
 
+
+
+
+
+
+#  bundle exec whenever
+
 # To clear your crontab, run the following command:
 # $ whenever -c
 
@@ -37,6 +44,10 @@
 set :environment, "development"
 set :output, {:error => "log/cron_error_log.log", :standard => "log/cron_log.log"}
 
+# every 2.minutes do
+#   rake 'show_count'
+# end
+
 every 2.minutes do
-  rake 'show_count'
+  runner "Message.remove_old"
 end
