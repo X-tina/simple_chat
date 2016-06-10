@@ -8,12 +8,20 @@ class ApplicationController < ActionController::Base
   acts_as_token_authentication_handler_for User, if: :request_json?
   respond_to :html, :json
 
-  before_action :authenticate_user!
-  before_action :set_online
+  before_action :authenticate_user!, :set_online
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   def request_json?
     request.format == 'application/json'
   end
+
+  protected
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.permit(:account_update,
+          keys: [:first_name, :last_name, :latitude, :longitude, :email]
+        )
+    end
+
 
   private
     def set_online
