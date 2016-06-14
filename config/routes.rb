@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   get 'rooms/show'
   get 'messages/index', as: 'messages'
 
-  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'devise_lib/omniauth_callbacks'
+  }
   
   devise_scope :user do
     post 'omniauth_callbacks/facebook', to: "omniauth_callbacks#facebook_auth_by_token"
@@ -12,7 +14,7 @@ Rails.application.routes.draw do
   
   root to: "home#index"
 
-
+  get 'nearby_users', to: "users#nearby_users"
   resources :users
 
   resources :messages, only: [:index] do
