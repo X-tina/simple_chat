@@ -58,6 +58,9 @@ gem 'kaminari'
 #Location
 gem 'geocoder'
 
+# Views
+gem 'rabl-rails'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

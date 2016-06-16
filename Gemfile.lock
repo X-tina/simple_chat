@@ -133,6 +133,10 @@ GEM
     orm_adapter (0.5.0)
     pg (0.18.4)
     puma (3.4.0)
+    rabl-rails (0.4.3)
+      activesupport (>= 3.1)
+      railties (>= 3.1)
+      thread_safe (~> 0.3.1)
     rack (2.0.0.rc1)
       json
     rack-test (0.6.3)
@@ -239,6 +243,7 @@ DEPENDENCIES
   omniauth-vkontakte
   pg
   puma (~> 3.0)
+  rabl-rails
   rails (>= 5.0.0.rc1, < 5.1)
   redis
   sass-rails (~> 5.0)
