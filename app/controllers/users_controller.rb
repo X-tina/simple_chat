@@ -53,7 +53,7 @@ class UsersController < ApplicationController
     if current_user
       @user = current_user
       @current_location = [@user.latitude, @user.longitude]
-      @users = Actions::NearbyUsers.new(@current_location).call
+      @users = Actions::NearbyUsers.new(@current_location).call.all_who_are_in_touch
     end
   end
 
