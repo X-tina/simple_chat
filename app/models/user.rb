@@ -1,9 +1,11 @@
 class User < ActiveRecord::Base
   acts_as_token_authenticatable
+  geocoded_by :full_street_address
   
   devise :database_authenticatable, :registerable,
        :recoverable, :rememberable, :trackable, :validatable,
-       :timeoutable, :recoverable, :omniauthable,
+       :recoverable, :omniauthable,
+       :timeoutable,
        :encryptable, :stretches => 30,
        :omniauth_providers => [:facebook]
   
@@ -21,5 +23,4 @@ class User < ActiveRecord::Base
     ids = $redis_onlines.keys
     self.find(ids)
   end
-
 end

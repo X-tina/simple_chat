@@ -1,0 +1,23 @@
+<h3>Nearby User List:</h3>
+<%= render @user %>
+
+<script type="text/javascript">
+  $(function() {
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+
+        if ("<%= @user.present? %>" == "true") {
+          var user_id = "<%= @user.try(:id) %>";
+
+          update_location(user_id, position);
+        } else {
+          get_location(latitude, longitude);
+        }
+      });     
+    } else {
+      alert("Geolocation API не поддерживается в вашем браузере");
+    }
+  });
+</script>
