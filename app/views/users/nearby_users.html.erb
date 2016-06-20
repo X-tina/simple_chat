@@ -1,5 +1,5 @@
 <h3>Nearby User List:</h3>
-<%= render @user %>
+<%= render 'user' %>
 
 <script type="text/javascript">
   $(function() {
@@ -13,7 +13,7 @@
 
           update_location(user_id, position);
         } else {
-          get_location(latitude, longitude);
+          get_location(position);
         }
       });     
     } else {

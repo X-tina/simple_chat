@@ -1,1 +1,2 @@
-<%= render @users %>
+<p> Online Users: </p>
+<%= render 'user', collection: @users || "There are no users online" %>

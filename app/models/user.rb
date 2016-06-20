@@ -19,8 +19,13 @@ class User < ActiveRecord::Base
     $redis_onlines.exist(self.id)
   end
 
-  def self.all_who_are_in_touch
+  def self.all_who_are_in_touch(current_user_id=nil)
     ids = $redis_onlines.keys
-    self.find(ids)
+    ids.delete(current_user_id.to_s)
+    self.where(id: ids)
+  end
+
+  def except_current_user(current_user_id)
+    self.where.not(id: current_user_id)
   end
 end
