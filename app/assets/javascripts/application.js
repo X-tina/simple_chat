@@ -31,3 +31,15 @@ function update_location(user_id, position) {
     }  
   });
 }
+
+function get_location1(position) {
+  var lat = position.coords.latitude;
+  var lon = position.coords.longitude;
+
+  console.log(lat + ', ' + lon);
+
+  $.get({
+    url: "/nearby_guests",
+    data: { user: {guest: 'true', latitude: lat, longitude: lon} }
+  });
+}

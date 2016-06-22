@@ -1,5 +1,10 @@
 <h3>Nearby User List:</h3>
-<%= render 'user' %>
+
+<% if @users %>
+  <%= render 'user', collection: @users || "There are no users online" %>
+<% else %>
+  "There are no users online"
+<% end %>
 
 <script type="text/javascript">
   $(function() {
@@ -13,7 +18,7 @@
 
           update_location(user_id, position);
         } else {
-          get_location(position);
+          get_location1(position);
         }
       });     
     } else {

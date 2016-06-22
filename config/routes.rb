@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   get 'nearby_users', to: "users#nearby_users"
+  get 'nearby_guests', to: "users#nearby_guests"
+  
   resources :users
 
   resources :messages, only: [:index] do
