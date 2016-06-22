@@ -5,11 +5,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session, if: :request_json?
   skip_before_filter :verify_authenticity_token, if: :request_json?
 
-  acts_as_token_authentication_handler_for User, if: :request_json?
-  respond_to :html, :json
+  acts_as_token_authentication_handler_for User, only: [:create, :update, :destroy]
 
-  before_action :authenticate_user!, :set_online
+  before_action :set_online
   before_action :configure_permitted_parameters, if: :devise_controller?
+
+  respond_to :html, :json
 
   def request_json?
     request.format == 'application/json'

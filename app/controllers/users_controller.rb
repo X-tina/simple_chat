@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:index, :edit, :update]
-  skip_before_filter :authenticate_user!, only: [:nearby_users, :nearby_guests]
+  before_action :authenticate_user!, only: [:index, :edit, :update, :destroy]
 
   def index
     @users = User.try(:all_who_are_in_touch)
@@ -51,18 +50,23 @@ class UsersController < ApplicationController
 
   def nearby_users
     if current_user
-
       @user = current_user
-      @current_location = [@user.latitude, @user.longitude]
+      @current_location =
+        request.format.json? ? [params[:latitude], params[:longitude]] : [@user.latitude, @user.longitude]
+
       @users = Actions::NearbyUsers.new(@current_location).call.all_who_are_in_touch(@user.try(:id))
 
       respond_to do |format|
         format.html
-        format.json { render index }
+        format.json { render 'index.json.rabl' }
       end
     else
       @current_location = [params[:latitude], params[:longitude]]
-      render 'errors/error.json.rabl'
+
+      respond_to do |format|
+        format.html
+        format.json { render 'errors/error.json.rabl' }
+      end
     end
   end
 

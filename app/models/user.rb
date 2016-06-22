@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   acts_as_token_authenticatable
+  
   geocoded_by :full_street_address
   
   devise :database_authenticatable, :registerable,

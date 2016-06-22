@@ -7,6 +7,6 @@ node(:meta) do {
             end
 
 node(:data) do { 
-                 error: "There are no objects"
+                 message: "There are no objects"
                }
             end
