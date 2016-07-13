@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :edit, :update, :destroy]
 
   def index
-    @users = User.try(:all_who_are_in_touch)
+    @users = User.try(:all_who_are_in_touch, current_user.id)
   end
 
   def show;  end
