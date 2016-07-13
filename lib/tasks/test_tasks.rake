@@ -4,6 +4,6 @@ task :show_count => :environment do
 end
 
 desc "Remove old messages"
-task :clean_messages => environment do
+task :clean_messages => :environment do
   CleanMessage.perform_async(CleanMessage::DAYS_NUM)
 end

@@ -14,3 +14,32 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+function update_location(user_id, position) {
+  var lat = position.coords.latitude;
+  var lon = position.coords.longitude;
+  var user_id = user_id;
+
+  $.ajax({
+    type: 'PUT',
+    url: "/users/" + user_id,
+    data: { user: {latitude: lat, longitude: lon} },
+    dataType: 'json',
+    success: function(data){ },
+    error: function(data) {
+      console.log(data);
+    }  
+  });
+}
+
+function get_location1(position) {
+  var lat = position.coords.latitude;
+  var lon = position.coords.longitude;
+
+  console.log(lat + ', ' + lon);
+
+  $.get({
+    url: "/nearby_guests",
+    data: { user: {guest: 'true', latitude: lat, longitude: lon} }
+  });
+}
