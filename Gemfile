@@ -61,6 +61,9 @@ gem 'geocoder'
 # Views
 gem 'rabl-rails'
 
+# Notifications
+gem 'rpush'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
