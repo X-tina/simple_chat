@@ -206,6 +206,9 @@ GEM
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
       redis (~> 3.2, >= 3.2.1)
+    simple_form (3.2.1)
+      actionpack (> 4, < 5.1)
+      activemodel (> 4, < 5.1)
     simple_token_authentication (1.13.0)
       actionmailer (>= 3.2.6, < 5)
       actionpack (>= 3.2.6, < 5)
@@ -271,6 +274,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   sidekiq
+  simple_form
   simple_token_authentication (~> 1.0)
   spring
   turbolinks
