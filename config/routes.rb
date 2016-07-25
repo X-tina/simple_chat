@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'nearby_guests', to: "users#nearby_guests"
   
   resources :users
+  resources :images
 
   resources :messages, only: [:index] do
     member do
