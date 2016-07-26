@@ -19,9 +19,11 @@
     <%= render 'show_present_images', category: category %>  
   <% end %>
  
-  <div id="add_image_button"><%= button_tag "Add new picture", data: { show: 0 }, class: "toggle_add_image_button" %></div>
+  <div id="add_image_button">
+    <%= button_tag "Add new picture", data: { show: 0 }, class: "toggle_add_image_button" %>
+  </div>
 
-  <div class="category_images">
+  <div class="new_category_images">
     <%= render 'add_images', f: f %>
   </div>
 
