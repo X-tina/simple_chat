@@ -1,11 +1,10 @@
-node(:category) { |object| 
+node(:image) { |object| 
                        {
                          id: object.id,
-                         category_name: object.name,
+                         url: object.url,
+                         text: object.text,
                          created_at: object.created_at,
                          updated_at: object.updated_at
                        }
 
             }
-
-child(:@images => :images) { extends('images/_image.json.rabl') }
