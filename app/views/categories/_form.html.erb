@@ -1,0 +1,50 @@
+<%= simple_form_for(category, html: { multipart: true }) do |f| %>
+  <% if category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+      <% category.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="category_attributes">
+    <%= f.input :name, as: :text %>
+  </div>
+  
+  <% if category.persisted? %>
+    <%= render 'show_present_images', category: category %>  
+  <% end %>
+ 
+  <div id="add_image_button">
+    <%= button_tag "Add new picture", data: { show: 0 }, class: "toggle_add_image_button" %>
+  </div>
+
+  <div class="new_category_images">
+    <%= render 'add_images', f: f %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<script>
+  $('#add_image_button').click(function(event) {
+    event.preventDefault();
+    var show_toggle = +$(this).find('.toggle_add_image_button').attr('data-show');
+
+    switch(show_toggle) {
+      case 0:
+        $('.toggle_add_image_button').attr('data-show', '1').text("Hide image");
+        $('.new_category_images').css('display', 'block');
+        return;
+      case 1:
+        $('.toggle_add_image_button').attr('data-show', '0').text("Add new picture");
+        $('.new_category_images').css('display', 'none');
+      }    
+  });
+</script>

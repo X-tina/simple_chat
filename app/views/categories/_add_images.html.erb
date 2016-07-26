@@ -1,0 +1,8 @@
+<p> Add new Picture and write text </p>
+
+<%= f.simple_fields_for :images, @category.images.build do |img| %>
+  <li>
+    <%= img.file_field :source, class: "input_image" %>
+    <%= img.input :text %>
+  </li>
+<% end %>
