@@ -22,7 +22,6 @@ class CategoriesController < ApplicationController
   # GET /categories/1/edit
   def edit
     @images = @category.images
-    5.times { @category.images.build } unless @images.any?
   end
 
   # POST /categories
@@ -47,7 +46,7 @@ class CategoriesController < ApplicationController
     @category.assign_attributes(category_params)
     respond_to do |format|
       if @category.save
-        format.html { redirect_to category_path(@category), notice: 'Category was successfully updated.' }
+        format.html { redirect_to edit_category_url(@category), notice: 'Category was successfully updated.' }
         format.json { render :show, status: :ok, location: @category }
       else
         format.html { render :edit }
