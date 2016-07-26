@@ -1,0 +1,30 @@
+<h2>Listen to a MP3 with HTML5 Audio</h2>
+<section id="audio"> 
+</section>
+
+<ul>
+<% @objects.each do |object| %>
+  <li>
+    <td><%= link_to "HTML5 Audio", "#{object.public_url}", :class => "html5" %></td>
+
+    <%= object.key %> 
+  </li>
+<% end %>
+</ul>
+
+
+<script>
+  $(document).ready(function() {
+    var audioSection = $('section#audio');
+    $('a.html5').click(function() {
+      var audio = $('<audio>', {
+        controls : 'controls'
+      });
+
+      var url = $(this).attr('href');
+      $('<source>').attr('src', url).appendTo(audio);
+      audioSection.html(audio);
+      return false;
+    });
+  });
+</script>

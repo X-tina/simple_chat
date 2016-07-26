@@ -1,0 +1,11 @@
+<% if category.images.present? %>
+<div class="images">
+  <% @images.map do |img| %>
+    <li>
+      <%= image_tag img.source.url %>
+      <%= img.text %>
+      <%= link_to "Delete", category_image_path(category, img), method: :delete, data: { confirm: 'Are you sure?' } %>
+    </li>
+  <% end %>
+</div>
+<% end %>

@@ -1,0 +1,8 @@
+<p> Add new Picture and write text </p>
+
+<%= f.simple_fields_for :images do |img| %>
+  <li>
+    <%= img.file_field :source %>
+    <%= img.input :text %>
+  </li>
+<% end %>

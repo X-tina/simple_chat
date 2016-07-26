@@ -16,10 +16,13 @@ class CategoriesController < ApplicationController
   # GET /categories/new
   def new
     @category = Category.new
+    5.times { @category.images.build }
   end
 
   # GET /categories/1/edit
   def edit
+    @images = @category.images
+    5.times { @category.images.build } unless @images.any?
   end
 
   # POST /categories
@@ -29,7 +32,7 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to @category, notice: 'Category was successfully created.' }
+        format.html { redirect_to categories_path, notice: 'Category was successfully created.' }
         format.json { render :show, status: :created, location: @category }
       else
         format.html { render :new }
@@ -41,8 +44,9 @@ class CategoriesController < ApplicationController
   # PATCH/PUT /categories/1
   # PATCH/PUT /categories/1.json
   def update
+    @category.assign_attributes(category_params)
     respond_to do |format|
-      if @category.update(category_params)
+      if @category.save
         format.html { redirect_to @category, notice: 'Category was successfully updated.' }
         format.json { render :show, status: :ok, location: @category }
       else
@@ -66,10 +70,11 @@ class CategoriesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_category
       @category = Category.find(params[:id])
+      @image = Image.new
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
-      params.require(:category).permit(:id, :name)
+      params.require(:category).permit(:id, :name, images_attributes: [:id, :source, :text, :_destroy])
     end
 end

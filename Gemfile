@@ -78,6 +78,9 @@ gem 'aws-sdk', '~> 2'
 # Forms
 gem 'simple_form'
 
+# Pictures
+gem "paperclip", "~> 5.0.0"
+
 
 
 # Use ActiveModel has_secure_password
