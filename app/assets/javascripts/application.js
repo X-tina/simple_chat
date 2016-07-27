@@ -43,3 +43,19 @@ function get_location1(position) {
     data: { user: {guest: 'true', latitude: lat, longitude: lon} }
   });
 }
+
+function toggle_add_new_image() {
+  $('#add_image_button').click(function(e) {
+    event.preventDefault();
+    var show_toggle = +$(this).find('.toggle_add_image_button').attr('data-show');
+
+    switch(show_toggle) {
+      case 0:
+        $('.toggle_add_image_button').attr('data-show', '1').text("Hide image");
+        return $('.new_category_images').css('display', 'block');          
+      case 1:
+        $('.toggle_add_image_button').attr('data-show', '0').text("Add new picture");
+        return $('.new_category_images').css('display', 'none');
+      }
+  });
+}
