@@ -74,6 +74,8 @@ gem 'rpush'
 # Storage
 gem 'aws-sdk-v1'
 gem 'aws-sdk', '~> 2'
+gem 'fog'
+
 
 # Forms
 gem 'simple_form'
