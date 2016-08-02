@@ -8,4 +8,4 @@ node(:category) { |object|
 
             }
 
-child(:@images => :images) { extends('images/_image.json.rabl') }
+node(:images) { |object| partial 'images/_image.json.rabl', :object => object.images }
