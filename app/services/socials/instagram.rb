@@ -11,24 +11,11 @@ class Socials::Instagram
   def create_user_by_token
     @inst_response = get_instagram_data(:client)
     @user_hash = @inst_response.user
-    
-    identity = Identity.where(provider: 'instagram', uid: @user_hash.id).first_or_create do |identity|
-      identity.provider_token = @response.access_token
-    end
-    @user = identity.user
 
-    unless @user
-      @user = User.new(
-               first_name: @user_hash.username,
-               last_name: @user_hash.last_name || @user_hash.full_name,
-               email: "#{TEMP_EMAIL_PREFIX}-#{@user_hash.id}-instagram.com",
-               password: Devise.friendly_token[0,20]
-             )
-      @user.save!
-      @user.identities << identity
-    end
+    @identity = Identity.find_for_oauth_instagram(@inst_response)
+    @user = @identity.user
 
-    @user
+    create_user unless user
   end
 
   # get user from Instagram by callback
@@ -36,22 +23,11 @@ class Socials::Instagram
     @inst_response = get_instagram_data(:response)
     @user_hash = @inst_response.user
 
-    identity = Identity.find_for_oauth_instagram(@inst_response)
-    user = signed_in_resource ? signed_in_resource : identity.user
-    
-    #Create the user if it's a new registration
-    unless user
-      user = User.new(
-               first_name: @user_hash.username,
-               last_name: @user_hash.last_name || @user_hash.full_name,
-               email: "#{TEMP_EMAIL_PREFIX}-#{@user_hash.id}-instagram.com",
-               password: Devise.friendly_token[0,20]
-             )
-      user.save!
-      user.identities << identity
-    end
+    @identity = Identity.find_for_oauth_instagram(@inst_response)
+    user = signed_in_resource ? signed_in_resource : @identity.user
 
-    user
+    #Create the user if it's a new registration
+    create_user unless user
   end
 
   private
@@ -63,5 +39,18 @@ class Socials::Instagram
       when :client
         Instagram.client(:access_token => @instagram_access_token)
       end
+  end
+
+  def create_user
+    user = User.new(
+             first_name: @user_hash.username,
+             last_name: @user_hash.last_name || @user_hash.full_name,
+             email: "#{TEMP_EMAIL_PREFIX}-#{@user_hash.id}-instagram.com",
+             password: Devise.friendly_token[0,20]
+           )
+    user.save!
+    user.identities << @identity
+
+    user
   end
 end
