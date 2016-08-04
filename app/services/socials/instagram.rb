@@ -2,13 +2,14 @@ class Socials::Instagram
   attr_accessor :user
   TEMP_EMAIL_PREFIX = User::TEMP_EMAIL_PREFIX
 
-  def initialize(instagram_response_code=nil)
+  def initialize(instagram_response_code=nil, instagram_access_token=nil)
     @instagram_response_code = instagram_response_code
+    @instagram_access_token = instagram_access_token
   end
 
   # Get user from Instagram by API and access_token
   def create_user_by_token
-    @inst_response = get_instagram_data(:response)
+    @inst_response = get_instagram_data(:client)
     @user_hash = @inst_response.user
     
     identity = Identity.where(provider: 'instagram', uid: @user_hash.id).first_or_create do |identity|
@@ -17,7 +18,6 @@ class Socials::Instagram
     @user = identity.user
 
     unless @user
-      email = @user_hash.email
       @user = User.new(
                first_name: @user_hash.username,
                last_name: @user_hash.last_name || @user_hash.full_name,
@@ -61,7 +61,7 @@ class Socials::Instagram
       when :response
         Instagram.get_access_token(@instagram_response_code, redirect_uri: ENV['CALLBACK_URL'])
       when :client
-        Instagram.client(:access_token => @response.access_token)
+        Instagram.client(:access_token => @instagram_access_token)
       end
   end
 end

@@ -53,7 +53,11 @@ class DeviseLib::OmniauthCallbacksController < Devise::OmniauthCallbacksControll
   
     render json: { meta: { message: 'successfull sign in via Facebook' },
                    data: { authentication_token: @user.authentication_token,
-                           email: @user.email } }
+                           email: @user.email,
+                           first_name: @user.first_name,
+                           last_name: @user.last_name
+                          }
+                  }
     rescue Koala::Facebook::AuthenticationError
       render json: { errors: 'wrong token' }
     rescue ActiveRecord::RecordInvalid => e
@@ -62,8 +66,18 @@ class DeviseLib::OmniauthCallbacksController < Devise::OmniauthCallbacksControll
 
   # Make POST request to: h/omniauth_callbacks/instagram with params: {"user": {"code": "......"} }
   def instagram_auth_by_token
-    instagram_init = Socials::Instagram.new(user_oauth_params[:code])
+    instagram_init = Socials::Instagram.new(nil,user_oauth_params[:access_token])
     @user = instagram_init.create_user_by_token
+
+    render json: { meta: { message: 'successfull sign in via Instagram' },
+                   data: { authentication_token: @user.authentication_token,
+                           email: @user.email,
+                           first_name: @user.first_name,
+                           last_name: @user.last_name
+                         }
+                 }
+    rescue ActiveRecord::RecordInvalid => e
+      render json: { errors: e.message }
   end
 
   private

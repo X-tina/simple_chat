@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   
   devise_scope :user do
     post 'omniauth_callbacks/facebook', to: "omniauth_callbacks#facebook_auth_by_token"
+    post 'omniauth_callbacks/instagram', to: "devise_lib/omniauth_callbacks#instagram_auth_by_token"
   end
 
   
