@@ -10,4 +10,10 @@ class Identity < ActiveRecord::Base
       # identity.image_url = auth_hash.info.image
     end
   end
+
+  def self.find_for_oauth_instagram(inst_response)
+  	where(uid: inst_response.user.id, provider: 'instagram').first_or_create do |identity|
+  		identity.provider_token = inst_response.access_token
+  	end
+  end
 end

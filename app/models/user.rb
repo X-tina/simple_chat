@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   acts_as_token_authenticatable
+  TEMP_EMAIL_PREFIX = "selfTest@"
 
   geocoded_by :full_street_address
   
@@ -8,7 +9,7 @@ class User < ActiveRecord::Base
        :recoverable, :omniauthable,
        :timeoutable,
        :encryptable, :stretches => 30,
-       :omniauth_providers => [:facebook]
+       :omniauth_providers => [:facebook, :instagram]
   
   has_many :identities, dependent: :destroy
 

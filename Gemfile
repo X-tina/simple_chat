@@ -46,7 +46,9 @@ gem 'simple_token_authentication', '~> 1.0'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
+gem 'omniauth-instagram'
 gem "koala", "~> 2.2"
+gem 'instagram'
 
 #Styles
 gem 'bootstrap-sass', '~> 3.2.0'
