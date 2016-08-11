@@ -22,8 +22,8 @@ Rails.application.configure do
     address: "smtp.gmail.com",
     port: "587",
     authentication: "plain",
-    user_name: "username.idap",
-    password: "idap123456789",
+    user_name: ENV["SOURCE_MAIL"],
+    password: ENV["SOURCE_MAIL_PASSWORD"],
     enable_starttls_auto: true
   }
 

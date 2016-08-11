@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   
   get 'rooms/show'
   get 'messages/index', as: 'messages'
+  post 'send_email', to: "email_notifications#send_email"
 
   devise_for :users, controllers: {
     omniauth_callbacks: 'devise_lib/omniauth_callbacks'
@@ -27,6 +28,10 @@ Rails.application.routes.draw do
     member do
       post 'actions', to: 'actions#index'
     end
+  end
+
+  scope module: 'stripe_lib' do
+    resources :charges
   end
 
   mount ActionCable.server => "/cable"
