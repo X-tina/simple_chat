@@ -7,5 +7,7 @@ class Image < ApplicationRecord
                     storage: :s3,
                     s3_credentials: S3_CREDENTIALS
   validates_attachment_content_type :source, content_type: /\Aimage\/.*\Z/
+  process_in_background :source
+  
   validates :text, presence: true
 end

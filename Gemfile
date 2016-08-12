@@ -60,6 +60,8 @@ gem "figaro"
 # Shedule tasks
 gem 'whenever', :require => false
 gem 'sidekiq'
+gem 'delayed_job_active_record' # only for Heroku
+gem 'daemons'
 
 # Pagination
 gem 'kaminari'
@@ -84,6 +86,9 @@ gem 'simple_form'
 
 # Pictures
 gem "paperclip", "~> 5.0.0"
+
+# Delayed
+gem 'delayed_paperclip'
 
 
 
